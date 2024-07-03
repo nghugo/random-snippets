@@ -36,18 +36,18 @@ def get_default_headers():
 
 def build_response(
     status_code: int = 200,
-    error_message: str = "",
     headers: dict = None,
     body_data: dict = None,
-    body_alternative_message: str = ""
+    body_warning_message: str = "",
+    body_error_message: str = "",
 ):
     response = {
         "statusCode": status_code,
-        "errorMessage": error_message,
         "headers": headers if headers is not None else get_default_headers(),
         "body": json.dumps({
             "bodyData": body_data if body_data is not None else {},
-            "bodyAlternativeMessage": body_alternative_message,
+            "bodyWarningMessage": body_warning_message,
+            "bodyErrorMessage": body_error_message,
         })
     }
     return response
