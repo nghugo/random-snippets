@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 type DataFetcherProps = {
   sourceName: string;
-  render: (data: any) => React.ReactNode; // Define the type of render function
+  render: (data: any) => React.ReactNode;
 };
 
 const fetchData = async (sourceName: string) => {
@@ -46,6 +46,11 @@ const DataFetcher: React.FC<DataFetcherProps> = ({ sourceName, render }) => {
       setLoading(false);
     }
   };
+
+  // Trigger data fetch on component mount (initial render)
+  React.useEffect(() => {
+    fetchDataForSource();
+  }, [sourceName]); // Fetch data when sourceName changes
 
   return (
     <div>
